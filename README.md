@@ -1,10 +1,10 @@
-# Sonar Retina 📡
+# Sonar Retina
 
 **Sonar Retina** is a real-time assistive application designed for individuals who are deaf or hard of hearing. It transforms environmental audio into a spatial "Radar UI," allowing users to perceive the distance and relative presence of surrounding sounds through visual cues.
 
 ---
 
-## 🏗 System Architecture
+## System Architecture
 
 The project consists of two main components:
 
@@ -13,7 +13,7 @@ The project consists of two main components:
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Prerequisites
 
@@ -58,7 +58,7 @@ flutter run
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 - `interface/`: Flutter source code, including custom radar painters and audio streaming logic.
 - `sslservice/`: FastAPI implementation and model loading utilities.
@@ -67,7 +67,7 @@ flutter run
 
 ---
 
-## 📝 Documentation
+## Documentation
 
 For detailed information on the **UI-Model Interface Contract** (JSON Schemas, Sequence Diagrams, and Testing Scenarios), please refer to:
 
@@ -75,7 +75,7 @@ For detailed information on the **UI-Model Interface Contract** (JSON Schemas, S
 
 ---
 
-## 📚 Credits & Datasets
+## Credits & Datasets
 
 - **SSL Dataset**: DCASE (Sound source distance estimation in diverse and dynamic acoustic conditions).
 - **SED Dataset**: FSD50K (Human-Labeled Sound Events).
