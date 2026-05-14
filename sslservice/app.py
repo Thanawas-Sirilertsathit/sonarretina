@@ -162,6 +162,7 @@ class PredictionResponse(BaseModel):
     confidence_score: float
     distance_bins_description: Dict[int, str]
 
+
 # --- FastAPI Endpoint ---
 @app.post("/predict", response_model=PredictionResponse)
 async def predict_distance(audio_file: UploadFile = File(...)):
@@ -180,14 +181,34 @@ async def predict_distance(audio_file: UploadFile = File(...)):
 
         # Simulate a confidence score (since pure regression models don't output probabilities natively).
         # In a real scenario, this could be derived from an ensemble variance or signal-to-noise ratio.
-        import random
-        simulated_confidence = round(random.uniform(0.75, 0.98), 2)
+
+        def calculate_confidence(distance, predicted_class):
+        
+            low, high = DISTANCE_BINS[predicted_class]
+
+            center = (low + high) / 2
+            half_range = (high - low) / 2
+
+            deviation = abs(distance - center)
+
+            confidence = np.exp(
+                -deviation / (half_range + 1e-6)
+            )
+
+            confidence = max(0.0, min(confidence, 1.0))
+
+            return round(float(confidence), 2)
+
+        confidence = calculate_confidence(
+            predicted_distance,
+            predicted_class
+        )
 
         return {
             "filename": audio_file.filename,
             "predicted_distance": float(predicted_distance),
             "predicted_class": int(predicted_class),
-            "confidence_score": simulated_confidence,
+            "confidence_score": confidence,
             "distance_bins_description": {k: f"{v[0]}m to {v[1]}m" for k, v in DISTANCE_BINS.items()}
         }
     except Exception as e:
